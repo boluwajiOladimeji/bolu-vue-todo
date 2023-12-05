@@ -1,4 +1,5 @@
 <script>
+import { v4 as uuidv4 } from 'uuid';
 export default {
   data() {
     return {
@@ -28,6 +29,7 @@ export default {
     onSubmit() {
       if (this.name.length < 1) return;
       let todo = {
+        id: uuidv4(),
         todo: this.name,
         completed: false,
       };
@@ -61,12 +63,13 @@ export default {
       let newTodos = this.todos.filter((todo, id) => id !== index);
       this.todos = newTodos;
     },
-    isCompleted(index) {
+    isCompleted(id) {
       if (this.selectedId !== null) return;
-      let newTodos = this.todos.map((item, id) =>
-        id === index ? { ...item, completed: !item.completed } : item
+      let newTodos = this.todos.map((item) =>
+        id === item.id ? { ...item, completed: !item.completed } : item
       );
       this.todos = newTodos;
+      // console.log(todo);
     },
     setCategory(category) {
       this.category = category;
@@ -160,7 +163,7 @@ export default {
                   :checked="todo.completed"
                   class="appearance-none bg-slate-800 border border-slate-200 w-5 h-5 rounded-full checked:bg-blue-200 cursor-pointer"
                   type="radio"
-                  @click="isCompleted(index)"
+                  @click="isCompleted(todo.id)"
                 />
                 <div
                   v-else
@@ -169,7 +172,7 @@ export default {
                   <img
                     src="./assets/images/icon-check.svg"
                     alt="okay"
-                    @click="isCompleted(index)"
+                    @click="isCompleted(todo.id)"
                   />
                 </div>
               </div>
@@ -177,7 +180,7 @@ export default {
               <p
                 :class="{ 'line-through': todo.completed }"
                 class="capitalize cursor-pointer flex-1 py-3"
-                @click="isCompleted(index)"
+                @click="isCompleted(todo.id)"
               >
                 {{ todo.todo }}
               </p>

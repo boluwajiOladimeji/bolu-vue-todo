@@ -40,6 +40,7 @@ export default {
       this.selectedId = index;
     },
     updateTodos() {
+      if (this.editedTodo === '') return;
       let newTodos = this.todos.map((item, index) =>
         index === this.selectedId
           ? { todo: this.editedTodo, completed: false }

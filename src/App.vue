@@ -9,7 +9,22 @@ export default {
       category: 'all',
     };
   },
+
+  created() {
+    this.loadTodos();
+  },
+
   methods: {
+    loadTodos() {
+      const loadedTodos = localStorage.getItem('todos');
+      if (loadedTodos) {
+        this.todos = JSON.parse(loadedTodos);
+      }
+    },
+    saveTodos() {
+      localStorage.setItem('todos', JSON.stringify(this.todos));
+    },
+
     onSubmit() {
       if (this.name.length < 1) return;
       let todo = {
@@ -61,6 +76,16 @@ export default {
       this.category = 'all';
     },
   },
+
+  watch: {
+    todos: {
+      handler() {
+        this.saveTodos();
+      },
+      deep: true,
+    },
+  },
+
   computed: {
     displayedValue() {
       if (this.category === 'all') {

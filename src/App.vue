@@ -35,6 +35,7 @@ export default {
       };
       this.todos.push(todo);
       this.name = '';
+      this.category = 'all';
     },
     updateSelectedId(index, todo) {
       this.editedTodo = todo;

@@ -43,20 +43,20 @@ export default {
       if (this.selectedId !== null) return;
       this.selectedId = index;
     },
-    updateTodos(todo) {
+    updateTodos(todo, id) {
       if (todo === '') return;
-      let newTodos = this.todos.map((item, index) =>
-        index === this.selectedId ? { todo: todo, completed: false } : item
+      let newTodos = this.todos.map((task, index) =>
+        id === task.id ? { ...task, todo } : task
       );
       this.todos = newTodos;
 
       this.selectedId = null;
       this.editedTodo = null;
     },
-    cancelUpdate(index) {
+    cancelUpdate(id) {
       this.selectedId = null;
-      const newTodos = this.todos.map((todo, id) =>
-        id === index ? { todo: this.editedTodo, completed: false } : todo
+      const newTodos = this.todos.map((todo) =>
+        id === todo.id ? { ...todo, todo: this.editedTodo } : todo
       );
       this.todos = newTodos;
     },
@@ -153,10 +153,14 @@ export default {
             You don't have any {{ this.category }} task
             {{ this.category === 'completed' ? '😟' : '💪' }}
           </p>
-          <li v-for="(todo, index) in displayedValue" :key="index">
+          <li
+            class="border-b"
+            v-for="(todo, index) in displayedValue"
+            :key="index"
+          >
             <div
               v-if="selectedId !== index"
-              class="flex items-center gap-4 px-6 text-sm border-b border-slate-200"
+              class="flex items-center gap-4 px-6 text-sm py-3"
             >
               <div>
                 <input
@@ -180,7 +184,7 @@ export default {
 
               <p
                 :class="{ 'line-through': todo.completed }"
-                class="capitalize cursor-pointer py-3 flex-1 max-w-sm"
+                class="capitalize cursor-pointer py-2 flex-1 max-w-sm"
                 @click="isCompleted(todo.id)"
               >
                 {{ todo.todo }}
@@ -203,23 +207,19 @@ export default {
             </div>
             <form
               v-else
-              class="flex items-center gap-4 update"
-              @submit.prevent="updateTodos(todo.todo)"
+              class="flex items-center gap-4 update px-6"
+              @submit.prevent="updateTodos(todo.todo, todo.id)"
             >
               <input
                 type="text"
-                class="update-input outline-none bg-slate-600 text-slate-200 flex-1 px-3 py-3"
+                class="update-input outline-none bg-slate-600 text-slate-200 flex-1 max-w-sm py-4 px-3"
                 v-model="todo.todo"
               />
-              <button class="ml-auto px-3 py-2">✔️</button>
+              <div class="ml-auto flex gap-8">
+                <button>✔️</button>
 
-              <button
-                type="button"
-                class="px-3 py-2"
-                @click="cancelUpdate(index)"
-              >
-                ⭕
-              </button>
+                <button type="button" @click="cancelUpdate(todo.id)">⭕</button>
+              </div>
             </form>
           </li>
         </ul>

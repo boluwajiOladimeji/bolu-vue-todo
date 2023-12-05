@@ -114,7 +114,10 @@ export default {
         </div>
 
         <ul v-show="todos.length >= 1" class="bg-slate-800 text-slate-200 mt-6">
-          <p class="py-8 text-xl text-center" v-show="displayedValue < 1">
+          <p
+            class="py-8 text-center px-3 text-sm md:text-xl border-b border-slate-200"
+            v-show="displayedValue < 1"
+          >
             You don't have any {{ this.category }} todos
             {{ this.category === 'completed' ? '😟' : '💪' }}
           </p>
@@ -187,7 +190,7 @@ export default {
         </ul>
         <div
           v-show="todos.length >= 1"
-          class="flex justify-between items-center text-slate-300 gap-4 text-sm md:text-base bg-slate-800 px-3 py-4"
+          class="flex justify-between items-center text-slate-300 gap-4 text-xs md:text-base bg-slate-800 px-3 py-4"
         >
           <p>
             {{ itemsLeft || 'No' }}

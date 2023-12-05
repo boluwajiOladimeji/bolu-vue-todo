@@ -187,7 +187,7 @@ export default {
         </ul>
         <div
           v-show="todos.length >= 1"
-          class="flex justify-between items-center text-slate-300 gap-4 bg-slate-800 px-3 py-4"
+          class="flex justify-between items-center text-slate-300 gap-4 text-sm md:text-base bg-slate-800 px-3 py-4"
         >
           <p>
             {{ itemsLeft || 'No' }}

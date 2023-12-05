@@ -142,7 +142,7 @@ export default {
           v-show="todos.length < 1"
           class="text-center text-xl my-8 py-8 text-slate-200 bg-slate-800"
         >
-          You have no Todos in your list 😟
+          You have no tasks to do 📕
         </div>
 
         <ul v-show="todos.length >= 1" class="bg-slate-800 text-slate-200">
@@ -150,13 +150,13 @@ export default {
             class="py-8 text-center px-3 text-sm md:text-xl"
             v-show="displayedValue < 1"
           >
-            You don't have any {{ this.category }} todos
+            You don't have any {{ this.category }} task
             {{ this.category === 'completed' ? '😟' : '💪' }}
           </p>
           <li v-for="(todo, index) in displayedValue" :key="index">
             <div
               v-if="selectedId !== index"
-              class="flex border-b border-slate-100 items-center gap-4 pl-3 text-sm"
+              class="flex border-b border-slate-100 items-center gap-4 px-6 text-sm"
             >
               <div>
                 <input
@@ -168,7 +168,7 @@ export default {
                 />
                 <div
                   v-else
-                  class="w-6 h-6 rounded-full ticked border border-slate-200 flex items-center justify-center"
+                  class="w-5 h-5 rounded-full ticked border border-slate-200 flex items-center justify-center"
                 >
                   <img
                     src="./assets/images/icon-check.svg"
@@ -180,14 +180,13 @@ export default {
 
               <p
                 :class="{ 'line-through': todo.completed }"
-                class="capitalize cursor-pointer flex-1 py-3"
+                class="capitalize cursor-pointer py-4 flex-1 max-w-sm"
                 @click="isCompleted(todo.id)"
               >
                 {{ todo.todo }}
               </p>
-              <div class="ml-auto flex gap-2">
+              <div class="ml-auto flex gap-8">
                 <button
-                  class="px-3 py-2"
                   @click="updateSelectedId(index, todo.todo)"
                   v-show="!todo.completed"
                 >
@@ -195,7 +194,7 @@ export default {
                 </button>
                 <button
                   :disabled="selectedId !== null"
-                  class="px-3 py-2 disabled:cursor-not-allowed justify-self-end"
+                  class="disabled:cursor-not-allowed justify-self-end"
                   @click="deleteTodo(index)"
                 >
                   ✖️
@@ -230,7 +229,7 @@ export default {
         >
           <p>
             {{ itemsLeft || 'No' }}
-            {{ itemsLeft > 1 ? 'items' : 'item' }} Left
+            {{ itemsLeft > 1 ? 'Tasks' : 'Task' }} Left
           </p>
           <div class="flex gap-3">
             <button

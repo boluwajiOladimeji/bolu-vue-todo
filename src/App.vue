@@ -149,13 +149,13 @@ export default {
           <li v-for="(todo, index) in displayedValue" :key="index">
             <div
               v-if="selectedId !== index"
-              class="flex border-b border-slate-100 items-center gap-4 pl-3"
+              class="flex border-b border-slate-100 items-center gap-4 pl-3 text-sm"
             >
               <div>
                 <input
                   v-if="!todo.completed"
                   :checked="todo.completed"
-                  class="appearance-none bg-slate-800 border border-slate-200 w-6 h-6 rounded-full checked:bg-blue-200 cursor-pointer"
+                  class="appearance-none bg-slate-800 border border-slate-200 w-5 h-5 rounded-full checked:bg-blue-200 cursor-pointer"
                   type="radio"
                   @click="isCompleted(index)"
                 />

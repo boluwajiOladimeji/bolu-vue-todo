@@ -136,7 +136,7 @@ export default {
         </button>
       </form>
 
-      <div>
+      <div class="min-h-[200px] bg-slate-800 flex flex-col mt-8">
         <div
           v-show="todos.length < 1"
           class="text-center text-xl my-8 py-8 text-slate-200 bg-slate-800"
@@ -144,9 +144,9 @@ export default {
           You have no Todos in your list 😟
         </div>
 
-        <ul v-show="todos.length >= 1" class="bg-slate-800 text-slate-200 mt-6">
+        <ul v-show="todos.length >= 1" class="bg-slate-800 text-slate-200">
           <p
-            class="py-8 text-center px-3 text-sm md:text-xl border-b border-slate-200"
+            class="py-8 text-center px-3 text-sm md:text-xl"
             v-show="displayedValue < 1"
           >
             You don't have any {{ this.category }} todos
@@ -161,7 +161,7 @@ export default {
                 <input
                   v-if="!todo.completed"
                   :checked="todo.completed"
-                  class="appearance-none bg-slate-800 border border-slate-200 w-5 h-5 rounded-full checked:bg-blue-200 cursor-pointer"
+                  class="appearance-none bg-slate-800 border border-slate-200 w-5 h-5 rounded-full cursor-pointer"
                   type="radio"
                   @click="isCompleted(todo.id)"
                 />
@@ -225,7 +225,7 @@ export default {
         </ul>
         <div
           v-show="todos.length >= 1"
-          class="flex justify-between items-center text-slate-300 gap-4 text-xs md:text-base bg-slate-800 px-3 py-4"
+          class="flex justify-between items-center text-slate-300 gap-4 text-xs md:text-base bg-slate-800 px-3 py-4 mt-auto"
         >
           <p>
             {{ itemsLeft || 'No' }}

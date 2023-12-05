@@ -34,26 +34,28 @@ export default {
       this.todos.push(todo);
       this.name = '';
     },
-    updateSelectedId(index) {
+    updateSelectedId(index, todo) {
+      this.editedTodo = todo;
       if (this.name) return;
       if (this.selectedId !== null) return;
       this.selectedId = index;
     },
-    updateTodos() {
-      if (this.editedTodo === '') return;
+    updateTodos(todo) {
+      if (todo === '') return;
       let newTodos = this.todos.map((item, index) =>
-        index === this.selectedId
-          ? { todo: this.editedTodo, completed: false }
-          : item
+        index === this.selectedId ? { todo: todo, completed: false } : item
       );
       this.todos = newTodos;
 
       this.selectedId = null;
       this.editedTodo = null;
     },
-    cancelUpdate() {
+    cancelUpdate(index) {
       this.selectedId = null;
-      this.editedTodo = null;
+      const newTodos = this.todos.map((todo, id) =>
+        id === index ? { todo: this.editedTodo, completed: false } : todo
+      );
+      this.todos = newTodos;
     },
     deleteTodo(index) {
       let newTodos = this.todos.filter((todo, id) => id !== index);
@@ -199,16 +201,20 @@ export default {
             <form
               v-else
               class="flex items-center gap-4 update"
-              @submit.prevent="updateTodos"
+              @submit.prevent="updateTodos(todo.todo)"
             >
               <input
                 type="text"
                 class="update-input outline-none bg-slate-600 text-slate-200 flex-1 px-3 py-3"
-                v-model="editedTodo"
+                v-model="todo.todo"
               />
               <button class="ml-auto px-3 py-2">✔️</button>
 
-              <button type="button" class="px-3 py-2" @click="cancelUpdate">
+              <button
+                type="button"
+                class="px-3 py-2"
+                @click="cancelUpdate(index)"
+              >
                 ⭕
               </button>
             </form>

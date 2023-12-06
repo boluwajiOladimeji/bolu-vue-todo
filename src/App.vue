@@ -117,7 +117,9 @@ export default {
 <template>
   <main class="section-center min-h-screen py-16 w-full">
     <div class="w-11/12 max-w-lg mx-auto">
-      <h1 class="text-3xl tracking-wider mb-8 text-slate-200">TODO</h1>
+      <h1 class="text-3xl tracking-wider mb-8 text-slate-200">
+        TASK LEDGER 📖
+      </h1>
 
       <form
         class="form flex text-center w-full text-slate-200"

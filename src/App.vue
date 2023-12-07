@@ -186,7 +186,7 @@ export default {
 
               <p
                 :class="{ 'line-through': todo.completed }"
-                class="capitalize cursor-pointer py-2 flex-1 max-w-sm"
+                class="capitalize cursor-pointer py-2 flex-1 max-w-sm break-all"
                 @click="isCompleted(todo.id)"
               >
                 {{ todo.todo }}
